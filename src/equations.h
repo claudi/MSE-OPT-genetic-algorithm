@@ -39,7 +39,10 @@ typedef struct {
     double delta;
 } Phenotype;
 
-/* Model to fit to the second epoch to check  the hypothesis that the migration
- * of Andouins occurs with social copying.
+/* Computes the predictions of the model with starting condition x0 and
+ * parameters p, and stores the result of length length in *x.
+ *
+ * This function will output 0 if it encounters no errors (nans returned by
+ * RKF78), and otherwise return the error code given by RKF78.
  */
-double model_equation(const double x, const Phenotype *const p);
+int model_prediction(const double x0, double *const x, const unsigned length, const Phenotype *const p);

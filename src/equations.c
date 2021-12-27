@@ -1,3 +1,4 @@
+#include "RKF78.h"
 #include "equations.h"
 #include <math.h>
 
@@ -16,6 +17,15 @@ static double sigmoid_dir(const double x, const double mu, const double sigma, c
  * diminish.
  */
 static double model_dispersal(const double x, const double mu, const double sigma, const double delta);
+
+/* Model to fit to the second epoch to check  the hypothesis that the migration
+ * of Andouins occurs with social copying.
+ */
+double model_equation(const double x, const Phenotype *const p);
+
+/* Adaptation of model_equation function to fit the signature required by RKF78.
+ */
+void model_ode(double t, double x, double *result, void *p);
 
 /* Intrinsic growth rate over the carrying capacity (birds^2/year).
  *
@@ -55,4 +65,47 @@ double model_equation(const double x, const Phenotype *const p) {
     const double base = (p->phi * x) - (beta * x * x);
 
     return base - p->lambda * model_dispersal(x, p->mu, p->sigma, p->delta);
+}
+
+void model_ode(double __attribute__((unused)) t, double x, double *result, void *p) {
+    *result = model_equation(x, p);
+}
+
+int model_prediction(const double x0, double *const x, const unsigned length, const Phenotype *const p) {
+    double t = 0.0;
+    double y = x0;
+    double step = 1.0e-6;
+    double error;
+    const double step_min = 1.0e-8;
+    const double step_max = 1.0e-3;
+    const double tolerance = 1.0e-15;
+
+    // Variables iter and t_end both count the same thing, but currently iter
+    // does so as an unsigned integer to index the x vector, while t_end is a
+    // double to easily compare it to t + step.
+    //
+    // This is done to avoid having to convert from integer to double or back.
+    //
+    // TODO: Check if it is worth it, performance wise.
+    unsigned iter = 1;
+    for(double t_end = 1; t_end < length; t_end++) {
+        while(t + step < t_end) {
+            int result = RKF78(&t, &y, &step, &error, step_min, step_max, tolerance, (void *) p, model_ode);
+            if(result != 0) {
+                return result;
+            }
+        }
+        step = t_end - t;
+
+        int result = RKF78(&t, &y, &step, &error, step_min, step_max, tolerance, (void *) p, model_ode);
+        if(result != 0) {
+            return result;
+        }
+
+        x[iter] = y;
+        iter++;
+    }
+    x[0] = x0;
+
+    return 0;
 }
