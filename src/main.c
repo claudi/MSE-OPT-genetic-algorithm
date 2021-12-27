@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "equations.h"
+#include "genotype.h"
 
 int main(void) {
     double x0 = 15329.0;
@@ -22,5 +23,9 @@ int main(void) {
     for(unsigned iter = 0; iter < 12; iter++) {
         printf("x[%u] = %lf\n", iter, x[iter]);
     }
+
+    printf("%zu\n", sizeof(Genotype));
+    printf("%zu\n", sizeof(Phenotype));
+
     return 0;
 }
