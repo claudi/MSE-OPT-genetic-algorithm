@@ -1,3 +1,5 @@
+#pragma once
+
 /* Contains the parameters for the model with equation
  *
  *     dx/dt = γx - βx^2 - λΨ(x, μ, σ, δ)
@@ -20,7 +22,9 @@ typedef struct {
     /* Determines the sign of the derivative of the dispersal function Ψ at x = 0.
      *
      *  - If μ is greater than 1, the sign will be negative,
+     *
      *  - If μ is lower than 1, the sign will be positive,
+     *
      *  - If μ is 1, the value of the derivative will be 0.
      *
      * Must be a positive number.
