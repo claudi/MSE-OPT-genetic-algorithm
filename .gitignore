@@ -15,3 +15,6 @@
 
 *.zip
 *.csv
+
+data/
+doc/
