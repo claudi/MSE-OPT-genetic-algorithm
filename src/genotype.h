@@ -68,3 +68,7 @@ typedef struct {
  * algorithm as unsigned integers, to floating point numbers.
  */
 Phenotype genoype_to_phenotype(const Genotype g);
+
+Genotype get_random_genotype();
+Genotype genotype_crossover(const Genotype g1, const Genotype g2);
+Genotype mutate_genotype(const Genotype g);
