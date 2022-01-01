@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 /* Generate random `flaot` between `0.0` and `1.0`.
  */
 float uniform(void);
@@ -8,12 +10,12 @@ void randomize(void);
 
 /* Generate random unsigned long integer of at most `width` bits
  */
-unsigned long random_UL_length(unsigned char width);
+uint64_t random_U64_length(unsigned char width);
 
 /* Generate random unsigned integer of at most `width` bits
  */
-unsigned random_U_length(unsigned char width);
+uint32_t random_U32_length(unsigned char width);
 
 /* Generate random unsigned short integer of at most `width` bits
  */
-unsigned short random_US_length(unsigned char width);
+uint16_t random_U16_length(unsigned char width);

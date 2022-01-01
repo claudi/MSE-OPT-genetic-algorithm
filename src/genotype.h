@@ -1,4 +1,5 @@
 #pragma once
+#include <stdint.h>
 #include "equations.h"
 
 #define PHI_LENGTH 34
@@ -31,7 +32,7 @@ typedef struct {
      *
      * - Integer search range: [0, 2^34 - 1].
      */
-    unsigned long phi : PHI_LENGTH;
+    uint64_t phi : PHI_LENGTH;
     /* - Theoretical search range: (0, ∞).
      *
      * - Effective search range: [0, 3000].
@@ -40,7 +41,7 @@ typedef struct {
      *
      * - Integer search range: [0, 2^25 - 1].
      */
-    unsigned lambda : LAMBDA_LENGTH;
+    uint32_t lambda : LAMBDA_LENGTH;
     /* - Theoretical search range: (0, ∞).
      *
      * - Effective search range: [0, 20].
@@ -49,7 +50,7 @@ typedef struct {
      *
      * - Integer search range: [0, 2^25 - 1].
      */
-    unsigned mu : MU_LENGTH;
+    uint32_t mu : MU_LENGTH;
     /* - Theoretical search range: (0, ∞).
      *
      * - Effective search range: [0, 1000].
@@ -58,7 +59,7 @@ typedef struct {
      *
      * - Integer search range: [0, 2^17 - 1].
      */
-    unsigned sigma : SIGMA_LENGTH;
+    uint32_t sigma : SIGMA_LENGTH;
     /* - Theoretical search range: (0, ∞).
      *
      * - Effective search range: [0, 25000].
@@ -67,7 +68,7 @@ typedef struct {
      *
      * - Integer search range: [0, 2^15 - 1].
      */
-    unsigned short delta : DELTA_LENGTH;
+    uint16_t delta : DELTA_LENGTH;
 } Genotype;
 
 /* Function to convert from discrertised coefficients, used by the genetic

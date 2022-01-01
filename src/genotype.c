@@ -20,11 +20,11 @@ Phenotype genoype_to_phenotype(const Genotype g) {
 
 Genotype get_random_genotype() {
     return (Genotype) {
-        .phi = random_UL_length(PHI_LENGTH),
-        .lambda = random_U_length(LAMBDA_LENGTH),
-        .mu = random_U_length(MU_LENGTH),
-        .sigma = random_U_length(SIGMA_LENGTH),
-        .delta = random_US_length(DELTA_LENGTH),
+        .phi = random_U64_length(PHI_LENGTH),
+        .lambda = random_U32_length(LAMBDA_LENGTH),
+        .mu = random_U32_length(MU_LENGTH),
+        .sigma = random_U32_length(SIGMA_LENGTH),
+        .delta = random_U16_length(DELTA_LENGTH),
     };
 }
 
