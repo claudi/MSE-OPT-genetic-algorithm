@@ -60,34 +60,32 @@ void genotype_crossover(const Genotype p1, const Genotype p2, Genotype *const c1
 }
 
 void bit_flip_mutation(Genotype *const g) {
-    const float prob = 0.5;
-
     for(int iter = 0; iter < phi_length; iter++) {
-        if(uniform() < prob) {
+        if(uniform() < 1.0f / phi_length) {
             g->phi ^= 1U << iter;
         }
     }
 
     for(int iter = 0; iter < lambda_length; iter++) {
-        if(uniform() < prob) {
+        if(uniform() < 1.0f / lambda_length) {
             g->lambda ^= 1U << iter;
         }
     }
 
     for(int iter = 0; iter < mu_length; iter++) {
-        if(uniform() < prob) {
+        if(uniform() < 1.0f / mu_length) {
             g->mu ^= 1U << iter;
         }
     }
 
     for(int iter = 0; iter < sigma_length; iter++) {
-        if(uniform() < prob) {
+        if(uniform() < 1.0f / sigma_length) {
             g->sigma ^= 1U << iter;
         }
     }
 
     for(int iter = 0; iter < delta_length; iter++) {
-        if(uniform() < prob) {
+        if(uniform() < 1.0f / delta_length) {
             g->delta ^= 1U << iter;
         }
     }
