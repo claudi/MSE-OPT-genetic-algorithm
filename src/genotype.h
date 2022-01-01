@@ -87,3 +87,8 @@ void genotype_crossover(const Genotype p1, const Genotype p2, Genotype *const c1
 /* Randomly mutate bits of a genotype.
  */
 void mutate_genotype(Genotype *const g);
+
+/* Calculate fitness of a genotype through the sum of the squared error between
+ * the predictions made from the associated phenotype and the observations.
+ */
+double get_genotype_fitness(Genotype const g);
