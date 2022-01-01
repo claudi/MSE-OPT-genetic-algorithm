@@ -79,5 +79,10 @@ Phenotype genoype_to_phenotype(const Genotype g);
  */
 Genotype get_random_genotype();
 
-Genotype genotype_crossover(const Genotype g1, const Genotype g2);
-Genotype mutate_genotype(const Genotype g);
+/* Mix and match parts of two genotypes to form two children genotypes.
+ */
+void genotype_crossover(const Genotype p1, const Genotype p2, Genotype *const c1, Genotype *const c2);
+
+/* Randomly mutate bits of a genotype.
+ */
+void mutate_genotype(Genotype *const g);
