@@ -74,10 +74,10 @@ void model_ode(double __attribute__((unused)) t, double x, double *result, void 
 int model_prediction(const double x0, double *const x, const unsigned length, const Phenotype *const p) {
     double t = 0.0;
     double y = x0;
-    double step = 1.0e-6;
+    double step = 1.0e-3;
     double error;
-    const double step_min = 1.0e-8;
-    const double step_max = 1.0e-3;
+    const double step_min = 1.0e-4;
+    const double step_max = 1.0e-2;
     const double tolerance = 1.0e-15;
 
     // Variables iter and t_end both count the same thing, but currently iter
