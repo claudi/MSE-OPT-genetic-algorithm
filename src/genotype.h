@@ -1,6 +1,12 @@
 #pragma once
 #include "equations.h"
 
+#define PHI_LENGTH 34
+#define LAMBDA_LENGTH 25
+#define MU_LENGTH 25
+#define SIGMA_LENGTH 17
+#define DELTA_LENGTH 15
+
 /* Structure containing the discretisation of the ODE parameters as unsigned
  * integers of appropriate length.
  *
@@ -25,7 +31,7 @@ typedef struct {
      *
      * - Integer search range: [0, 2^34 - 1].
      */
-    unsigned long phi : 34;
+    unsigned long phi : PHI_LENGTH;
     /* - Theoretical search range: (0, ∞).
      *
      * - Effective search range: [0, 3000].
@@ -34,7 +40,7 @@ typedef struct {
      *
      * - Integer search range: [0, 2^25 - 1].
      */
-    unsigned lambda : 25;
+    unsigned lambda : LAMBDA_LENGTH;
     /* - Theoretical search range: (0, ∞).
      *
      * - Effective search range: [0, 20].
@@ -43,7 +49,7 @@ typedef struct {
      *
      * - Integer search range: [0, 2^25 - 1].
      */
-    unsigned mu : 25;
+    unsigned mu : MU_LENGTH;
     /* - Theoretical search range: (0, ∞).
      *
      * - Effective search range: [0, 1000].
@@ -52,7 +58,7 @@ typedef struct {
      *
      * - Integer search range: [0, 2^17 - 1].
      */
-    unsigned sigma : 17;
+    unsigned sigma : SIGMA_LENGTH;
     /* - Theoretical search range: (0, ∞).
      *
      * - Effective search range: [0, 25000].
@@ -61,10 +67,22 @@ typedef struct {
      *
      * - Integer search range: [0, 2^15 - 1].
      */
-    unsigned short delta : 15;
+    unsigned short delta : DELTA_LENGTH;
 } Genotype;
 
 /* Function to convert from discrertised coefficients, used by the genetic
  * algorithm as unsigned integers, to floating point numbers.
  */
 Phenotype genoype_to_phenotype(const Genotype g);
+
+/* Generate random genotype.
+ */
+Genotype get_random_genotype();
+
+/* Mix and match parts of two genotypes to form two children genotypes.
+ */
+void genotype_crossover(const Genotype p1, const Genotype p2, Genotype *const c1, Genotype *const c2);
+
+/* Randomly mutate bits of a genotype.
+ */
+void mutate_genotype(Genotype *const g);
