@@ -1,6 +1,12 @@
 #pragma once
 #include "equations.h"
 
+const unsigned char phi_length = 34;
+const unsigned char lambda_length = 25;
+const unsigned char mu_length = 25;
+const unsigned char sigma_length = 17;
+const unsigned char delta_length = 15;
+
 /* Structure containing the discretisation of the ODE parameters as unsigned
  * integers of appropriate length.
  *
@@ -25,7 +31,7 @@ typedef struct {
      *
      * - Integer search range: [0, 2^34 - 1].
      */
-    unsigned long phi : 34;
+    unsigned long phi : phi_length;
     /* - Theoretical search range: (0, ∞).
      *
      * - Effective search range: [0, 3000].
@@ -34,7 +40,7 @@ typedef struct {
      *
      * - Integer search range: [0, 2^25 - 1].
      */
-    unsigned lambda : 25;
+    unsigned lambda : lambda_length;
     /* - Theoretical search range: (0, ∞).
      *
      * - Effective search range: [0, 20].
@@ -43,7 +49,7 @@ typedef struct {
      *
      * - Integer search range: [0, 2^25 - 1].
      */
-    unsigned mu : 25;
+    unsigned mu : mu_length;
     /* - Theoretical search range: (0, ∞).
      *
      * - Effective search range: [0, 1000].
@@ -52,7 +58,7 @@ typedef struct {
      *
      * - Integer search range: [0, 2^17 - 1].
      */
-    unsigned sigma : 17;
+    unsigned sigma : sigma_length;
     /* - Theoretical search range: (0, ∞).
      *
      * - Effective search range: [0, 25000].
@@ -61,7 +67,7 @@ typedef struct {
      *
      * - Integer search range: [0, 2^15 - 1].
      */
-    unsigned short delta : 15;
+    unsigned short delta : delta_length;
 } Genotype;
 
 /* Function to convert from discrertised coefficients, used by the genetic
