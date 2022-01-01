@@ -1,3 +1,7 @@
+/* Generate random `flaot` between `0.0` and `1.0`.
+ */
+float uniform(void);
+
 /* Utility functions to simplify the use of `ran1` and `idum`.
  */
 void randomize(void);

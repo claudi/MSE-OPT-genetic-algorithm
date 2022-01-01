@@ -75,6 +75,9 @@ typedef struct {
  */
 Phenotype genoype_to_phenotype(const Genotype g);
 
+/* Generate random genotype.
+ */
 Genotype get_random_genotype();
+
 Genotype genotype_crossover(const Genotype g1, const Genotype g2);
 Genotype mutate_genotype(const Genotype g);
