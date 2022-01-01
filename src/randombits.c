@@ -1,3 +1,6 @@
+#include "randombits.h"
+#include <stdint.h>
+
 #define USHRT_WIDTH (16)
 #define UINT_WIDTH (32)
 
@@ -166,10 +169,10 @@ unsigned char UCHARran(void) {
     return base;
 }
 
-unsigned long random_UL_length(unsigned char width) {
+uint64_t random_U64_length(unsigned char width) {
     register unsigned char i;
     const unsigned long oneUL = 1UL;
-    unsigned long base = 0UL;
+    uint64_t base = 0UL;
 
     for(i = 0; i < width; i++) {
         if(random_bit()) {
@@ -188,10 +191,10 @@ unsigned long random_UL_length(unsigned char width) {
     return base;
 }
 
-unsigned random_U_length(unsigned char width) {
+uint32_t random_U32_length(unsigned char width) {
     register unsigned char i;
     const unsigned oneUL = 1UL;
-    unsigned base = 0UL;
+    uint32_t base = 0UL;
 
     for(i = 0; i < width; i++) {
         if(random_bit()) {
@@ -210,10 +213,10 @@ unsigned random_U_length(unsigned char width) {
     return base;
 }
 
-unsigned short random_US_length(unsigned char width) {
+uint16_t random_U16_length(unsigned char width) {
     register unsigned char i;
     const unsigned short oneUL = 1UL;
-    unsigned short base = 0UL;
+    uint16_t base = 0UL;
 
     for(i = 0; i < width; i++) {
         if(random_bit()) {
