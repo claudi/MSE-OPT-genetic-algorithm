@@ -1,6 +1,7 @@
 #include "equations.h"
 #include "genotype.h"
 #include "randombits.h"
+#include <stdint.h>
 
 Phenotype genoype_to_phenotype(const Genotype g) {
     const double phi = g.phi * ((0.35 + 100.0) / ((double) (1UL << PHI_LENGTH) - 1)) - 100.0;
@@ -67,38 +68,45 @@ void genotype_crossover(const Genotype p1, const Genotype p2, Genotype *const c1
  */
 static void bit_flip_mutation(Genotype *const g) {
     // Consider defining a global bitflip probability of 1/(8*sizeof(Genotype))
+    const double prob = 0.5;
 
     for(int iter = 0; iter < PHI_LENGTH; iter++) {
-        if(uniform() < 1.0f / PHI_LENGTH) {
-            g->phi ^= 1U << iter;
+        if(uniform() < prob) {
+            g->phi ^= ((uint64_t) 1) << iter;
         }
     }
 
     for(int iter = 0; iter < LAMBDA_LENGTH; iter++) {
-        if(uniform() < 1.0f / LAMBDA_LENGTH) {
-            g->lambda ^= 1U << iter;
+        if(uniform() < prob) {
+            g->lambda ^= ((uint32_t) 1) << iter;
         }
     }
 
     for(int iter = 0; iter < MU_LENGTH; iter++) {
-        if(uniform() < 1.0f / MU_LENGTH) {
-            g->mu ^= 1U << iter;
+        if(uniform() < prob) {
+            g->mu ^= ((uint32_t) 1) << iter;
         }
     }
 
     for(int iter = 0; iter < SIGMA_LENGTH; iter++) {
-        if(uniform() < 1.0f / SIGMA_LENGTH) {
-            g->sigma ^= 1U << iter;
+        if(uniform() < prob) {
+            g->sigma ^= ((uint32_t) 1) << iter;
         }
     }
 
     for(int iter = 0; iter < DELTA_LENGTH; iter++) {
-        if(uniform() < 1.0f / DELTA_LENGTH) {
-            g->delta ^= 1U << iter;
+        if(uniform() < prob) {
+            g->delta ^= ((uint16_t) 1) << iter;
         }
     }
 }
 
 void mutate_genotype(Genotype *const g) {
     bit_flip_mutation(g);
+}
+
+double get_genotype_fitness(Genotype const g) {
+    const Phenotype p = genoype_to_phenotype(g);
+
+    return get_phenotype_fitness(p);
 }

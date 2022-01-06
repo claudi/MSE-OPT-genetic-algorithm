@@ -50,3 +50,7 @@ typedef struct {
  * RKF78), and otherwise return the error code given by RKF78.
  */
 int model_prediction(const double x0, double *const x, const unsigned length, const Phenotype *const p);
+
+/* Calculate fitness of a phenotype through the sum of the squared error.
+ */
+double get_phenotype_fitness(const Phenotype p);
