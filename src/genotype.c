@@ -71,31 +71,31 @@ static void bit_flip_mutation(Genotype *const g) {
     const double prob = 0.5;
 
     for(int iter = 0; iter < PHI_LENGTH; iter++) {
-        if(uniform() < prob) {
+        if(uniform() < ((float) iter + 1) / PHI_LENGTH) {
             g->phi ^= ((uint64_t) 1) << iter;
         }
     }
 
     for(int iter = 0; iter < LAMBDA_LENGTH; iter++) {
-        if(uniform() < prob) {
+        if(uniform() < ((float) iter + 1) / LAMBDA_LENGTH) {
             g->lambda ^= ((uint32_t) 1) << iter;
         }
     }
 
     for(int iter = 0; iter < MU_LENGTH; iter++) {
-        if(uniform() < prob) {
+        if(uniform() < ((float) iter + 1) / MU_LENGTH) {
             g->mu ^= ((uint32_t) 1) << iter;
         }
     }
 
     for(int iter = 0; iter < SIGMA_LENGTH; iter++) {
-        if(uniform() < prob) {
+        if(uniform() < ((float) iter + 1) / SIGMA_LENGTH) {
             g->sigma ^= ((uint32_t) 1) << iter;
         }
     }
 
     for(int iter = 0; iter < DELTA_LENGTH; iter++) {
-        if(uniform() < prob) {
+        if(uniform() < ((float) iter + 1) / DELTA_LENGTH) {
             g->delta ^= ((uint16_t) 1) << iter;
         }
     }
