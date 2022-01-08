@@ -74,12 +74,8 @@ Individual run_genetic_algorithm(const unsigned n_individuals) {
     Individual *individuals = (Individual *) malloc(sizeof(Individual) * n_individuals);;
     Individual *new_individuals = (Individual *) malloc(sizeof(Individual) * n_individuals);;
 
-#pragma omp parallel default (none) shared (individuals) firstprivate (n_individuals) num_threads (8)
-    {
-#pragma omp for
-        for(unsigned iter = 0; iter < n_individuals; iter++) {
-            individuals[iter] = get_random_individual();
-        }
+    for(unsigned iter = 0; iter < n_individuals; iter++) {
+        individuals[iter] = get_random_individual();
     }
     Individual best = individuals[0];
     best.fitness = DBL_MAX;
@@ -97,7 +93,7 @@ Individual run_genetic_algorithm(const unsigned n_individuals) {
         }
         printf("\n");
 
-        printf("Best fitness so far: %lf\n", sqrt(best.fitness));
+        printf("Best fitness so far: %lf (%lf)\n", best.fitness, sqrt(best.fitness));
         Phenotype p = genoype_to_phenotype(best.genotype);
         printf("\tphi: %f\n\tlambda: %f\n\tmu: %f\n\tsigma: %f\n\tdelta: %f\n",
                 p.phi, p.lambda, p.mu, p.sigma, p.delta);

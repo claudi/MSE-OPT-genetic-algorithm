@@ -8,7 +8,7 @@
 
 int main(void) {
     randomize();
-    Individual best = run_genetic_algorithm(10000);
+    Individual best = run_genetic_algorithm(5000);
     Phenotype p = genoype_to_phenotype(best.genotype);
 
     double x[12] = { 15329.0 };
