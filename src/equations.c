@@ -19,7 +19,7 @@ static double sigmoid_dir(const double x, const double mu, const double sigma, c
  */
 static double model_dispersal(const double x, const double mu, const double sigma, const double delta);
 
-/* Model to fit to the second epoch to check  the hypothesis that the migration
+/* Model to fit to the second epoch to check the hypothesis that the migration
  * of Andouins occurs with social copying.
  */
 double model_equation(const double x, const Phenotype *const p);
