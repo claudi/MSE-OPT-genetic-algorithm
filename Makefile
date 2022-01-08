@@ -31,7 +31,7 @@ release.tar.gz: $(SOURCES) $(DEPENDS) Makefile README.rst
 clean:
 	$(RM) $(OBJECTS)
 	$(RM) $(EXECUTS)
-	$(RM) $(HELPERS)
+	$(RM) $(HELPERS) gmon.out
 	$(RM) release.tar.gz
 
 .PHONY: bin
