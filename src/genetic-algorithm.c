@@ -38,7 +38,7 @@ static Individual tournament_selection(const Individual *individuals, const unsi
 /* Returns a random individual from the population.
  */
 static Individual select_individual_with_replacement(const Individual *individuals, const unsigned n_individuals) {
-    return tournament_selection(individuals, n_individuals, 10);
+    return tournament_selection(individuals, n_individuals, 50);
 }
 
 /* Mix and match  genotypes of two individuals to form two children genotypes.
@@ -102,9 +102,9 @@ Individual run_genetic_algorithm(const unsigned n_individuals) {
         printf("\tphi: %f\n\tlambda: %f\n\tmu: %f\n\tsigma: %f\n\tdelta: %f\n",
                 p.phi, p.lambda, p.mu, p.sigma, p.delta);
 
-        for(unsigned iter = 0; iter < n_individuals / 2; iter++) {
-            Individual p1 = select_random_individual(individuals, n_individuals);
-            Individual p2 = select_random_individual(individuals, n_individuals);
+        for(unsigned iter = 0; iter < (n_individuals - 1) / 2; iter++) {
+            Individual p1 = select_individual_with_replacement(individuals, n_individuals);
+            Individual p2 = select_individual_with_replacement(individuals, n_individuals);
             Individual c1, c2;
 
             individual_crossover(p1, p2, &c1, &c2);
@@ -114,6 +114,9 @@ Individual run_genetic_algorithm(const unsigned n_individuals) {
             new_individuals[2 * iter] = c1;
             new_individuals[(2 * iter) + 1] = c2;
         }
+
+        new_individuals[n_individuals - 2] = best;
+        new_individuals[n_individuals - 1] = best;
 
 #pragma omp parallel default (none) shared (new_individuals) firstprivate (n_individuals) num_threads (8)
         {
