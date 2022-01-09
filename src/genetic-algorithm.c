@@ -82,21 +82,20 @@ Individual run_genetic_algorithm(const unsigned n_individuals) {
 
     const unsigned n_generations = 1000;
     unsigned generation = 0;
-    while((generation < n_generations) && (best.fitness > 10)) {
-        const clock_t start = clock();
-        printf("Generation %u\n", generation);
-
+    for(unsigned generation = 0; generation < n_generations; generation++) {
         for(unsigned iter = 0; iter < n_individuals; iter++) {
             if(individuals[iter].fitness < best.fitness) {
                 best = individuals[iter];
             }
         }
-        printf("\n");
 
-        printf("Best fitness so far: %lf (%lf)\n", best.fitness, sqrt(best.fitness));
-        Phenotype p = genoype_to_phenotype(best.genotype);
-        printf("\tphi: %f\n\tlambda: %f\n\tmu: %f\n\tsigma: %f\n\tdelta: %f\n",
-                p.phi, p.lambda, p.mu, p.sigma, p.delta);
+        if(generation % 100 == 0) {
+            printf("Generation %u\n", generation);
+            printf("Best fitness so far: %lf (%lf)\n", best.fitness, sqrt(best.fitness));
+            Phenotype p = genoype_to_phenotype(best.genotype);
+            printf("\tphi: %f\n\tlambda: %f\n\tmu: %f\n\tsigma: %f\n\tdelta: %f\n",
+                    p.phi, p.lambda, p.mu, p.sigma, p.delta);
+        }
 
         for(unsigned iter = 0; iter < (n_individuals - 1) / 2; iter++) {
             Individual p1 = select_individual_with_replacement(individuals, n_individuals);
@@ -125,10 +124,6 @@ Individual run_genetic_algorithm(const unsigned n_individuals) {
         Individual *tmp = individuals;
         individuals = new_individuals;
         new_individuals = tmp;
-
-        generation++;
-        const clock_t end = clock();
-        printf("time: %lfs\n", ((double) end - start) / ((double) 8 * CLOCKS_PER_SEC));
     }
 
     free(individuals);
