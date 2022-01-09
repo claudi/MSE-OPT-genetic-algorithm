@@ -9,7 +9,7 @@
  * The function Ψ corresponds to the dispersal function.
  */
 typedef struct {
-    /* Intrinsic growth rate (birds^2/year).
+    /* Intrinsic growth rate (1/year).
      *
      * Using the first epoch it can be estimated to be γ = 0.406001835194.
      */

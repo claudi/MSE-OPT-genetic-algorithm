@@ -38,7 +38,7 @@ static Individual tournament_selection(const Individual *individuals, const unsi
 /* Returns a random individual from the population.
  */
 static Individual select_individual_with_replacement(const Individual *individuals, const unsigned n_individuals) {
-    return tournament_selection(individuals, n_individuals, 50);
+    return tournament_selection(individuals, n_individuals, 10);
 }
 
 /* Mix and match  genotypes of two individuals to form two children genotypes.
@@ -57,8 +57,8 @@ static void mutate_individual(Individual *const individual) {
  */
 static Individual get_random_individual() {
     Genotype g = get_random_genotype();
-
     double fitness = get_genotype_fitness(g);
+
     while(fitness == DBL_MAX) {
         g = get_random_genotype();
         fitness = get_genotype_fitness(g);

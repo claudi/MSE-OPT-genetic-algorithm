@@ -20,7 +20,7 @@
  * formula for the genotype.
  *
  * The structure is packed as to occupy the least space possible, and in total
- * we achieve a `sizeof(Phenotype) = 16`, while `sizeof(Genotype) = 40`.
+ * we achieve a `sizeof(Phenotype) = 40`, while `sizeof(Genotype) = 16`.
  */
 typedef struct {
     /* - Theoretical search range: (-∞, α], where α = 0.3489494085776018 is the

@@ -28,7 +28,7 @@ double model_equation(const double x, const Phenotype *const p);
  */
 void model_ode(double t, double x, double *result, void *p);
 
-/* Intrinsic growth rate over the carrying capacity (birds^2/year).
+/* Intrinsic growth rate over the carrying capacity (1/year*birds).
  *
  * Estimated with the first epoch data to be 0.000024382635446.
  *
