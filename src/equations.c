@@ -81,13 +81,6 @@ int model_prediction(const double x0, double *const x, const unsigned length, co
     const double step_max = 1.0e-2;
     const double tolerance = 1.0e-8;
 
-    // Variables iter and t_end both count the same thing, but currently iter
-    // does so as an unsigned integer to index the x vector, while t_end is a
-    // double to easily compare it to t + step.
-    //
-    // This is done to avoid having to convert from integer to double or back.
-    //
-    // TODO: Check if it is worth it, performance wise.
     unsigned iter = 1;
     for(double t_end = 1; t_end < length; t_end++) {
         while(t + step < t_end) {
@@ -124,6 +117,7 @@ double get_phenotype_fitness(const Phenotype p) {
         return DBL_MAX;
     }
 
+    // double fitness = 0.0;
     double fitness = DBL_MAX_EXP;
     const double y[12] = { 15329.0, 14177.0, 13031.0, 9762.0, 11271.0, 8688.0, 7571.0, 6983.0, 4778.0, 2067.0, 1586.0, 793.0 };
     const double w[12] = {     1.0,     1.0,     1.0,    0.0,     1.0,    1.0,    1.0,    1.0,    3.0,    3.0,    3.0,   8.0 };

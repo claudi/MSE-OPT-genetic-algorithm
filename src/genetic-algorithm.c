@@ -80,7 +80,6 @@ Individual run_genetic_algorithm(const unsigned n_individuals) {
     best.fitness = DBL_MAX;
 
     const unsigned n_generations = 1000;
-    unsigned generation = 0;
     for(unsigned generation = 0; generation < n_generations; generation++) {
         for(unsigned iter = 0; iter < n_individuals; iter++) {
             if(individuals[iter].fitness < best.fitness) {
