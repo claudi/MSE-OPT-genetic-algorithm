@@ -67,35 +67,34 @@ void genotype_crossover(const Genotype p1, const Genotype p2, Genotype *const c1
  * probability `1 / length`, where `length` is the bitlength of the parameter.
  */
 static void bit_flip_mutation(Genotype *const g) {
-    // Consider defining a global bitflip probability of 1/(8*sizeof(Genotype))
     const double prob = 0.5;
 
     for(int iter = 0; iter < PHI_LENGTH; iter++) {
-        if(uniform() < prob) {
+        if(uniform() * (PHI_LENGTH * PHI_LENGTH) > prob * ((iter + 1) * (iter + 1))) {
             g->phi ^= ((uint64_t) 1) << iter;
         }
     }
 
     for(int iter = 0; iter < LAMBDA_LENGTH; iter++) {
-        if(uniform() < prob) {
+        if(uniform() * (LAMBDA_LENGTH * LAMBDA_LENGTH) > prob * ((iter + 1) * (iter + 1))) {
             g->lambda ^= ((uint32_t) 1) << iter;
         }
     }
 
     for(int iter = 0; iter < MU_LENGTH; iter++) {
-        if(uniform() < prob) {
+        if(uniform() * (MU_LENGTH * MU_LENGTH) > prob * ((iter + 1) * (iter + 1))) {
             g->mu ^= ((uint32_t) 1) << iter;
         }
     }
 
     for(int iter = 0; iter < SIGMA_LENGTH; iter++) {
-        if(uniform() < prob) {
+        if(uniform() * (SIGMA_LENGTH * SIGMA_LENGTH) > prob * ((iter + 1) * (iter + 1))) {
             g->sigma ^= ((uint32_t) 1) << iter;
         }
     }
 
     for(int iter = 0; iter < DELTA_LENGTH; iter++) {
-        if(uniform() < prob) {
+        if(uniform() * (DELTA_LENGTH * DELTA_LENGTH) > prob * ((iter + 1) * (iter + 1))) {
             g->delta ^= ((uint16_t) 1) << iter;
         }
     }

@@ -19,7 +19,7 @@ static double sigmoid_dir(const double x, const double mu, const double sigma, c
  */
 static double model_dispersal(const double x, const double mu, const double sigma, const double delta);
 
-/* Model to fit to the second epoch to check  the hypothesis that the migration
+/* Model to fit to the second epoch to check the hypothesis that the migration
  * of Andouins occurs with social copying.
  */
 double model_equation(const double x, const Phenotype *const p);
@@ -28,7 +28,7 @@ double model_equation(const double x, const Phenotype *const p);
  */
 void model_ode(double t, double x, double *result, void *p);
 
-/* Intrinsic growth rate over the carrying capacity (birds^2/year).
+/* Intrinsic growth rate over the carrying capacity (1/year*birds).
  *
  * Estimated with the first epoch data to be 0.000024382635446.
  *
@@ -81,13 +81,6 @@ int model_prediction(const double x0, double *const x, const unsigned length, co
     const double step_max = 1.0e-2;
     const double tolerance = 1.0e-8;
 
-    // Variables iter and t_end both count the same thing, but currently iter
-    // does so as an unsigned integer to index the x vector, while t_end is a
-    // double to easily compare it to t + step.
-    //
-    // This is done to avoid having to convert from integer to double or back.
-    //
-    // TODO: Check if it is worth it, performance wise.
     unsigned iter = 1;
     for(double t_end = 1; t_end < length; t_end++) {
         while(t + step < t_end) {
@@ -124,15 +117,16 @@ double get_phenotype_fitness(const Phenotype p) {
         return DBL_MAX;
     }
 
-    double fitness = 0.0;
+    // double fitness = 0.0;
+    double fitness = DBL_MAX_EXP;
     const double y[12] = { 15329.0, 14177.0, 13031.0, 9762.0, 11271.0, 8688.0, 7571.0, 6983.0, 4778.0, 2067.0, 1586.0, 793.0 };
-    const double w[12] = {     1.0,     1.0,     1.0,    0.0,     1.0,    1.0,    1.0,    1.0,    1.0,    1.0,    1.0,   1.0 };
+    const double w[12] = {     1.0,     1.0,     1.0,    0.0,     1.0,    1.0,    1.0,    1.0,    3.0,    3.0,    3.0,   8.0 };
     for(unsigned char iter = 1; iter < 12; iter++) {
         const double tmp = w[iter] * (y[iter] - x[iter]) * (y[iter] - x[iter]);
-        fitness += tmp;
-        // if(tmp > fitness) {
-            // fitness = tmp;
-        // }
+        // fitness += tmp;
+        if(tmp > fitness) {
+            fitness = tmp;
+        }
     }
 
     return fitness;
