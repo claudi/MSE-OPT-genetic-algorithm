@@ -124,15 +124,15 @@ double get_phenotype_fitness(const Phenotype p) {
         return DBL_MAX;
     }
 
-    double fitness = 0.0;
+    double fitness = DBL_MAX_EXP;
     const double y[12] = { 15329.0, 14177.0, 13031.0, 9762.0, 11271.0, 8688.0, 7571.0, 6983.0, 4778.0, 2067.0, 1586.0, 793.0 };
-    const double w[12] = {     1.0,     1.0,     1.0,    0.0,     1.0,    1.0,    1.0,    1.0,    3.0,    3.0,    3.0,  10.0 };
+    const double w[12] = {     1.0,     1.0,     1.0,    0.0,     1.0,    1.0,    1.0,    1.0,    3.0,    3.0,    3.0,   8.0 };
     for(unsigned char iter = 1; iter < 12; iter++) {
         const double tmp = w[iter] * (y[iter] - x[iter]) * (y[iter] - x[iter]);
-        fitness += tmp;
-        // if(tmp > fitness) {
-            // fitness = tmp;
-        // }
+        // fitness += tmp;
+        if(tmp > fitness) {
+            fitness = tmp;
+        }
     }
 
     return fitness;
